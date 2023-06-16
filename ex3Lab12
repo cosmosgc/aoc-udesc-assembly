@@ -1,0 +1,22 @@
+.text
+.globl main
+main:
+    	# Carregar os valores de a e b nos registradores $t0 e $t1
+    	li $t0, 5   
+    	li $t1, 5   
+
+    	# Verificar a expressão (a < b) || ((a+b) == 10)
+    	slt $t2, $t0, $t1   # Verificar se a < b (se a < b, $t2 = 1, senão $t2 = 0)
+    	add $t3, $t0, $t1   # Somar a + b e armazenar em $t3
+    	li $t4, 10          # Carregar o valor 10 em $t4
+    	seq $t5, $t3, $t4   # Verificar se (a+b) == 10 (se sim, $t5 = 1, senão $t5 = 0)
+    	or $t2, $t2, $t5    # Realizar a operação de OR entre (a < b) e ((a+b) == 10) e armazenar em $t2
+
+    	# Imprimir o resultado para o usuário
+    	move $a0, $t2      
+    	li $v0, 1           
+    	syscall
+
+    	# Encerrar o programa
+    	li $v0, 10          
+    	syscall
